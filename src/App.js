@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import './app.scss';
+import { Switch, Route } from "react-router-dom";
 
+import Layout from "./pages/layout/layout";
+
+import './app.scss';
 export default class App extends Component {
   render () {
     return (
-      <div className="app">
-        <header className="app-header">掘金</header>
-        <section className="app-content">代码不停，掘金不止</section>
-      </div>
+      <Switch>
+        <Route path="/" component={Layout} />
+      </Switch>
     )
   }
 }

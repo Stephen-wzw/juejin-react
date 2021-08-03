@@ -1,0 +1,22 @@
+.tag-list {
+  height: auto;
+  display: flex;
+  align-items: center;
+
+  padding: 1rem 2rem;
+  
+  font-size: 1.1rem;
+  
+  .tag-item {
+    margin-right: .83rem;
+    margin-bottom: .75rem;
+    padding: 0.3rem 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+  }
+
+  .active {
+    background-color: #007fff;
+    color: #fff;
+  }
+}
