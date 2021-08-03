@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Layout from "./pages/layout/layout";
+import Home from "./pages/home/home";
+import History from "./pages/history/history";
+import Footer from "./components/footer/footer";
 
-import './app.scss';
+import "./app.scss";
 export default class App extends Component {
-  render () {
+  render() {
     return (
-      <Switch>
-        <Route path="/" component={Layout} />
-      </Switch>
-    )
+      <div className="app">
+        <div className="app-content"> 
+          <Switch>
+            <Route path="/history" component={History} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 }

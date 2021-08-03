@@ -11,4 +11,6 @@ html {
 
 a {
   text-decoration: none;
+  cursor: pointer;
+  color: #909090;
 }
