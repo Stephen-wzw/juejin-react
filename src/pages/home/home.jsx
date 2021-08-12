@@ -1,33 +1,40 @@
-import React, { Component } from 'react';
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { Component } from "react";
 
 import Header from "../../components/header/header";
+import PostList from "../../components/post-list/post-list";
+import Footer from "../../components/footer/footer";
 
-import Recommend from "../recommend/recommend";
-import Backend from "../backend/backend";
-import Frontend from "../frontend/frontend";
-import Android from "../android/android";
-import Ios from "../ios/ios";
+import { getCategories, getArticles } from "../../fake-api";
 
 import "./index.scss";
 
 export default class Home extends Component {
+  state = {
+    categories: [],
+    articles: [],
+  };
 
-  render () {
+  async componentDidMount() {
+    const res_categories = await getCategories();
+    const res_articles = await getArticles();
+
+    this.setState({
+      categories: res_categories.data.categories,
+      articles: res_articles.data.articles,
+    });
+  }
+
+  render() {
+    const { categories, articles } = this.state;
+    
     return (
       <div className="home">
-        <Header />
+        <Header categories={categories} />
         <div className="home-content">
-          <Switch>
-            <Route path="/recommend" component={Recommend} />
-            <Route path="/backend" component={Backend} />
-            <Route path="/frontend" component={Frontend} />
-            <Route path="/android" component={Android} />
-            <Route path="/ios" component={Ios} />
-            <Redirect exact={true} from="/" to="/recommend" />
-          </Switch>
+          <PostList articles={articles} />
         </div>
+        <Footer />
       </div>
-    )
+    );
   }
 }
