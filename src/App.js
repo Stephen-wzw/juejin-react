@@ -5,6 +5,8 @@ import Home from "./pages/home/home";
 import History from "./pages/history/history";
 import Post from "./pages/post/post";
 
+import Footer from "./components/footer/footer";
+
 import "./app.scss";
 export default class App extends Component {
   render() {
@@ -17,6 +19,7 @@ export default class App extends Component {
             <Route path="/" component={Home} />
           </Switch>
         </div>
+        <Footer />
       </div>
     );
   }

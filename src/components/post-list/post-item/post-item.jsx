@@ -1,24 +1,22 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 import { getDate } from "../../../utils/common";
 
 import "./index.scss";
 
-export default class PostItem extends Component {
+class PostItem extends Component {
 
   itemClick = (id) => {
-    return () => {
-      console.log(id);
-    }
+    this.props.history.push(`/post/${id}`);
   }
 
   render() {
     const { article } = this.props;
-    console.log(article);
     const { article_id, article_info, author_user_info, category_info } = article;
  
     return (
-      <div className="post-item" onClick={this.itemClick(article_id)}>
+      <div className="post-item" onClick={() => this.itemClick(article_id)}>
 
         <div className="meta-wrap">
           <div className="author">
@@ -60,3 +58,5 @@ export default class PostItem extends Component {
     )
   }
 }
+
+export default withRouter(PostItem)

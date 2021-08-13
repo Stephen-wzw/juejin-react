@@ -6,6 +6,7 @@ export default class post extends Component {
     return (
       <div>
         Post
+        {this.props.match.params.id}
       </div>
     )
   }
