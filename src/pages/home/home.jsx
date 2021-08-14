@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import qs from "querystring";
 
 import Header from "../../components/header/header";
+import SubTag from "../../components/sub-tag/sub-tag";
 import PostList from "../../components/post-list/post-list";
 
 import { getCategories,  getArticles } from "../../fake-api";
@@ -12,6 +13,7 @@ export default class Home extends Component {
   state = {
     categories: [],
     articles: [],
+    tagList: [],
   };
 
   getCategories = async () => {
@@ -19,8 +21,20 @@ export default class Home extends Component {
     this.setState({ categories: res_categories.data.categories });
   }
 
+  getTagById = (id) => {
+    const { categories } = this.state;
+    const category = categories.filter(item => item.category_id === id)[0];
+
+    if (category) {
+      const tagList = category.children || [];
+
+      this.setState({ tagList });
+    }
+  }
+
   getArticles = async (categoryId, sortType) => {
     const res_articles = await getArticles(categoryId, sortType, 0, 10);
+
     this.setState({ articles: res_articles.data.articles });
   }
 
@@ -30,27 +44,26 @@ export default class Home extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { search, state } = this.props.location;
-    const pre_search = prevProps.location.search;
+    const { state } = this.props.location;
     const pre_state = prevProps.location.state;
-    console.log("-", search, "-", pre_search);
-    console.log("-", state, "-", pre_state);
-    // const { sortType } = qs.parse(search.slice(1));
 
-    if (search !== pre_search || state !== pre_state) {
+    if (state !== pre_state) {
       const { categoryId, sortType } = state || {};
-      console.log('排序方式',sortType);
-      console.log(state);
+
       this.getArticles(categoryId, sortType);
+      this.getTagById(categoryId);
     }
   }
 
   render() {
-    const { categories, articles } = this.state;
+    const { categories, tagList, articles } = this.state;
     return (
       <div className="home">
         <Header categories={categories} />
         <div className="home-content">
+          {
+            tagList.length ? <SubTag tagList={tagList} /> : null
+          }
           <PostList articles={articles} />
         </div>
       </div>

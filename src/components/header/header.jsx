@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-import TagList from "../tag-list/tag-list";
-
-import { getTagsById } from "../../utils/common";
-
 import "./index.scss";
 
 class Header extends Component {
@@ -20,15 +16,10 @@ class Header extends Component {
     // 点击路由切换，state传递参数
     const { sortType } = this.props.location.state || {};
     this.props.history.push("/", { categoryId: id, sortType });
-    // 根据id获取对应tagList
-    const { categories } = this.props;
-    const tagList = getTagsById(categories, id);
-    this.setState({tagList});
   }
 
   render() {
     const { categories } = this.props;
-    console.log(categories);
     
     return (
       <div className="header">
@@ -49,8 +40,6 @@ class Header extends Component {
             })
           }
         </div>
-
-        <TagList tagList={this.state.tagList} />
       </div>
     );
   }
