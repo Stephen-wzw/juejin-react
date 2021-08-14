@@ -51,7 +51,9 @@ class PostItem extends Component {
               </div>
             </div>
           </div>
-          <img src={article_info.cover_image} alt="封面图片"/>
+          {
+            article_info.cover_image ? <img src={article_info.cover_image} alt="封面图片"/> : null
+          }
         </div>
 
       </div>

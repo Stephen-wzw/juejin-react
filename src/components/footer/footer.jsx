@@ -14,14 +14,17 @@ class Footer extends Component {
   };
 
   tabClick = (id) => {
+    const { categoryId } = this.props.location.state || {};
+
     switch (id) {
       case "hot":
         this.setState({currentIndex: 0});
-        this.props.history.push("/");
+        console.log(this.props.location.state);
+        this.props.history.push("/", { categoryId, sortType: "hot" });
         break;
       case "new":
         this.setState({currentIndex: 1});
-        this.props.history.push("/?sortType=new");
+        this.props.history.push("/", { categoryId, sortType: "new" });
         break;
       case "history":
         this.setState({currentIndex: 2});
