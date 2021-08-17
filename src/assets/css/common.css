@@ -1,6 +1,26 @@
 html {
   font-size: 12px;
   background-color: #f4f5f5;
+  overflow-y: scroll;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+:root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+:root body {
+  position: absolute;
+}
+
+body {
+  width: 100vw;
+  overflow: hidden;
 }
 
 * {
