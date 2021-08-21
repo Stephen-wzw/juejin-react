@@ -10,13 +10,20 @@ import Footer from "./components/footer/footer";
 import "./app.scss";
 export default class App extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="app">
         <div className="app-content"> 
           <Switch>
             <Route path="/history" component={History} />
             <Route path="/post/:id" component={Post} />
-            <Route path="/" component={Home} />
+            <Route path="/" exact>
+              {props => (
+                <div style={ props.match ? null : { display: "none" }}>
+                  <Home {...props} />
+                </div>
+              )}
+            </Route>
           </Switch>
         </div>
         <Footer />

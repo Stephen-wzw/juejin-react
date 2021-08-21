@@ -3,9 +3,11 @@ import React, { Component } from "react";
 
 import Header from "../../components/header/header";
 import SubTag from "../../components/sub-tag/sub-tag";
+import InfiniteScroll from "../../components/infinite-scroll/infinite-scroll";
 import PostList from "../../components/post-list/post-list";
 
 import { getCategories,  getArticles } from "../../fake-api";
+import { getScrollTop } from "../../utils/storage";
 
 import "./index.scss";
 
@@ -14,6 +16,8 @@ export default class Home extends Component {
     categories: [],
     articles: [],
     tagList: [],
+    loading: false,
+    offset: 0,
   };
 
   getCategories = async () => {
@@ -32,22 +36,54 @@ export default class Home extends Component {
     }
   }
 
-  getArticles = async (categoryId, sortType) => {
-    const res_articles = await getArticles(categoryId, sortType, 0, 10);
+  getArticles = async (categoryId, sortType, offset) => {
+    // this.setState({ articles: [] })
+    const res_articles = await getArticles(categoryId, sortType, offset);
 
-    this.setState({ articles: res_articles.data.articles });
+    if (this.state.loading) {
+      const articles = this.state.articles.concat(res_articles.data.articles);
+      console.log("加载更多触发的获取文章",articles);
+      this.setState({ articles, loading: false });
+    } else {
+      
+      this.setState({ articles: res_articles.data.articles })
+      console.log("第一次获取文章", this.state.articles);
+    }
+  }
+  // BUG 进入详情路由后，没有记录当前位置
+  loadMore = () => {
+    if (this.state.loading) return;
+
+    this.setState({ loading: true });
+    console.log("加载更多")
+
+    const { categoryId, sortType } = this.props.location.state || {};
+    let { offset } = this.state;
+    offset += 10;
+    this.setState({ offset });
+
+    this.getArticles(categoryId, sortType, offset);
   }
 
   componentDidMount() {
     this.getCategories();
     this.getArticles();
+
+    let scrollTop = Number(getScrollTop());
+    console.log(scrollTop);
+    window.scroll(0, scrollTop, 0);
+    
+    console.log("组件挂载获取文章", this.state.articles);
   }
 
   componentDidUpdate(prevProps) {
     const { state } = this.props.location;
     const pre_state = prevProps.location.state;
-
+    
+    // 如果路由携带的状态参数改变了，则重新请求数据。
     if (state !== pre_state) {
+      window.scrollTo(0, 0);
+
       const { categoryId, sortType } = state || {};
 
       this.getArticles(categoryId, sortType);
@@ -64,7 +100,9 @@ export default class Home extends Component {
           {
             tagList.length ? <SubTag tagList={tagList} /> : null
           }
-          <PostList articles={articles} />
+          <InfiniteScroll loadMore={this.loadMore}>
+            <PostList articles={articles} />
+          </InfiniteScroll>
         </div>
       </div>
     );

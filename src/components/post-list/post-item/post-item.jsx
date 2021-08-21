@@ -6,24 +6,25 @@ import { getDate } from "../../../utils/common";
 import "./index.scss";
 
 class PostItem extends Component {
-
   itemClick = (id) => {
     this.props.history.push(`/post/${id}`);
-  }
+  };
 
   render() {
     const { article } = this.props;
-    const { article_id, article_info, author_user_info, category_info } = article;
- 
+    const {
+      article_id,
+      article_info,
+      author_user_info,
+      category_info,
+    } = article;
+
     return (
       <div className="post-item" onClick={() => this.itemClick(article_id)}>
-
         <div className="meta-wrap">
-          <div className="author">
-            { author_user_info.user_name }
-          </div>
+          <div className="author">{author_user_info.user_name}</div>
           <div className="dividing"></div>
-          <div className="date">{ getDate(article_info.ctime * 1000) }</div>
+          <div className="date">{getDate(article_info.ctime * 1000)}</div>
           <div className="dividing"></div>
           <div className="tag-list">
             <div className="tag">{category_info.first_category_name}</div>
@@ -51,14 +52,14 @@ class PostItem extends Component {
               </div>
             </div>
           </div>
-          {
-            article_info.cover_image ? <img src={article_info.cover_image} alt="封面图片"/> : null
-          }
+          {/* TODO 实现图片懒加载 */}
+          {article_info.cover_image ? (
+            <img className="pic" src={article_info.cover_image} alt="加载中" />
+          ) : null}
         </div>
-
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(PostItem)
+export default withRouter(PostItem);
