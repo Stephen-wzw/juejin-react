@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./pages/home/home";
 import History from "./pages/history/history";
 import Post from "./pages/post/post";
+import KeepAlive from "./components/keep-alive/keep-alive.js";
 
 import Footer from "./components/footer/footer";
 
@@ -17,13 +18,9 @@ export default class App extends Component {
           <Switch>
             <Route path="/history" component={History} />
             <Route path="/post/:id" component={Post} />
-            <Route path="/" exact>
-              {props => (
-                <div style={ props.match ? null : { display: "none" }}>
-                  <Home {...props} />
-                </div>
-              )}
-            </Route>
+            <KeepAlive>
+              <Route path="/" component={Home} />
+            </KeepAlive>
           </Switch>
         </div>
         <Footer />
