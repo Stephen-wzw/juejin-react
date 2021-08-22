@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import "./index.scss";
 
-class Header extends Component {
+class HomeHeader extends Component {
 
   state = {
     currentId: 0,
@@ -22,7 +22,7 @@ class Header extends Component {
     const { categories } = this.props;
     
     return (
-      <div className="header">
+      <div className="home-header">
         <div className="nav-wrap">
           {
             categories.map((item, index) => {
@@ -45,4 +45,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header)
+export default withRouter(HomeHeader);

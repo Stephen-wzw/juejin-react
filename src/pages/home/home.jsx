@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import qs from "querystring";
 
-import Header from "../../components/header/header";
+import HomeHeader from "../../components/home-header/home-header";
 import SubTag from "../../components/sub-tag/sub-tag";
 import InfiniteScroll from "../../components/infinite-scroll/infinite-scroll";
 import PostList from "../../components/post-list/post-list";
@@ -90,7 +90,7 @@ export default class Home extends Component {
     const { categories, tagList, articles } = this.state;
     return (
       <div className="home">
-        <Header categories={categories} />
+        <HomeHeader categories={categories} />
         <div className="home-content">
           {
             tagList.length ? <SubTag tagList={tagList} /> : null
