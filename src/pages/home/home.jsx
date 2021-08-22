@@ -37,17 +37,14 @@ export default class Home extends Component {
   }
 
   getArticles = async (categoryId, sortType, offset) => {
-    // this.setState({ articles: [] })
     const res_articles = await getArticles(categoryId, sortType, offset);
 
     if (this.state.loading) {
       const articles = this.state.articles.concat(res_articles.data.articles);
-      console.log("加载更多触发的获取文章",articles);
       this.setState({ articles, loading: false });
     } else {
       
       this.setState({ articles: res_articles.data.articles })
-      console.log("第一次获取文章", this.state.articles);
     }
   }
   // BUG 进入详情路由后，没有记录当前位置
@@ -55,7 +52,6 @@ export default class Home extends Component {
     if (this.state.loading) return;
 
     this.setState({ loading: true });
-    console.log("加载更多")
 
     const { categoryId, sortType } = this.props.location.state || {};
     let { offset } = this.state;
@@ -68,7 +64,6 @@ export default class Home extends Component {
   componentDidMount() {
     this.getCategories();
     this.getArticles();
-    console.log("组件挂载获取文章", this.state.articles);
   }
 
   componentDidUpdate(prevProps) {

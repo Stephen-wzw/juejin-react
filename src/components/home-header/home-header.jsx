@@ -15,7 +15,7 @@ class HomeHeader extends Component {
     this.setState({currentId: id});
     // 点击路由切换，state传递参数
     const { sortType } = this.props.location.state || {};
-    this.props.history.push("/list", { categoryId: id, sortType });
+    this.props.history.push("/", { categoryId: id, sortType });
   }
 
   render() {
