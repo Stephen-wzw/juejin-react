@@ -20,11 +20,11 @@ class Footer extends Component {
       case "hot":
         this.setState({currentIndex: 0});
         console.log(this.props.location.state);
-        this.props.history.push("/", { categoryId, sortType: "hot" });
+        this.props.history.push("/list", { categoryId, sortType: "hot" });
         break;
       case "new":
         this.setState({currentIndex: 1});
-        this.props.history.push("/", { categoryId, sortType: "new" });
+        this.props.history.push("/list", { categoryId, sortType: "new" });
         break;
       case "history":
         this.setState({currentIndex: 2});

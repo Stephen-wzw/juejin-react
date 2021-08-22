@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-
-import { saveScrollTop } from "../../utils/storage";
-
 export default class InfiniteScroll extends Component {
 
   // 组件挂载时监听滚动事件
   componentDidMount() {
-    this.pageLoaded = 1;
-    console.log(this);
     this.attachScrollListener();
   }
 
   // 组件卸载时不再监听滚动事件
   componentWillUnmount() {
     this.detachScrollListener();
-    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-    saveScrollTop(scrollTop);
   }
 
   attachScrollListener = () => {

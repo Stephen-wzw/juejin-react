@@ -5,9 +5,9 @@ import Header from "../../components/header/header";
 import SubTag from "../../components/sub-tag/sub-tag";
 import InfiniteScroll from "../../components/infinite-scroll/infinite-scroll";
 import PostList from "../../components/post-list/post-list";
+import Footer from "../../components/footer/footer";
 
 import { getCategories,  getArticles } from "../../fake-api";
-import { getScrollTop } from "../../utils/storage";
 
 import "./index.scss";
 
@@ -68,11 +68,6 @@ export default class Home extends Component {
   componentDidMount() {
     this.getCategories();
     this.getArticles();
-
-    let scrollTop = Number(getScrollTop());
-    console.log(scrollTop);
-    window.scroll(0, scrollTop, 0);
-    
     console.log("组件挂载获取文章", this.state.articles);
   }
 
@@ -104,6 +99,7 @@ export default class Home extends Component {
             <PostList articles={articles} />
           </InfiniteScroll>
         </div>
+        <Footer />
       </div>
     );
   }
