@@ -1,4 +1,4 @@
-export function getDate(timeStamp) {
+export function getTimeFromCurrnt(timeStamp) {
   //时间戳为10位需*1000，时间戳为13位的话不需乘1000
   const now = new Date(),
         ctime = new Date(timeStamp),
@@ -35,4 +35,13 @@ export function getDate(timeStamp) {
   } else if (s > 0) {
     return `${s}秒前`;
   } 
+}
+
+export function getDate(timeStamp) {
+  const ctime = new Date(timeStamp),
+        ctime_Y = ctime.getFullYear(),
+        ctime_M = ctime.getMonth() + 1,
+        ctime_D = ctime.getDate();
+        
+  return `${ctime_Y}年${ctime_M}月${ctime_D}日`;
 }

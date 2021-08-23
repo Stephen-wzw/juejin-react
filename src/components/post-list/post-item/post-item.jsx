@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-import { getDate } from "../../../utils/common";
+import { getTimeFromCurrnt } from "../../../utils/common";
 
 import "./index.scss";
 
@@ -24,7 +24,7 @@ class PostItem extends Component {
         <div className="meta-wrap">
           <div className="author">{author_user_info.user_name}</div>
           <div className="dividing"></div>
-          <div className="date">{getDate(article_info.ctime * 1000)}</div>
+          <div className="date">{getTimeFromCurrnt(article_info.ctime * 1000)}</div>
           <div className="dividing"></div>
           <div className="tag-list">
             <div className="tag">{category_info.first_category_name}</div>
