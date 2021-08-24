@@ -19,7 +19,6 @@ class Footer extends Component {
     switch (id) {
       case "hot":
         this.setState({currentIndex: 0});
-        console.log(this.props.location.state);
         this.props.history.push("/", { categoryId, sortType: "hot" });
         break;
       case "new":
@@ -29,6 +28,7 @@ class Footer extends Component {
       case "history":
         this.setState({currentIndex: 2});
         this.props.history.push("/history");
+        console.log("历史");
         break;
       default:
         break;
@@ -37,6 +37,7 @@ class Footer extends Component {
 
   render() {
     const { currentIndex, tabList } = this.state;
+    
     return (
       <div className="footer">
         <div className="tab-list">
