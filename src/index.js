@@ -8,7 +8,7 @@ import "./assets/css/common.css";
 
 ReactDOM.render(
   <Router>
-    <App />
+    <App />,
   </Router>,
   document.getElementById("root")
 );

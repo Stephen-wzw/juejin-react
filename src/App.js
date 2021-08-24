@@ -12,15 +12,15 @@ export default class App extends Component {
       // TODO 状态保持
       <div className="app">
         <div className="app-content">
-            <Route path="/history" component={History} />
-            <Route path="/post/:id" component={Detail} />
-            <Route path="/" exact children={props=> {
-              return (
-                <div style={props.match ? null : { display: 'none' }}>
-                  <Home {...props}/>
-                </div>
-              )
-            }} />
+          <Route path="/post/:id" component={Detail} />
+          <Route path="/history" component={History} />
+          <Route path="/" exact children={props=> {
+            return (
+              <div style={props.match ? null : { display: 'none' }}>
+                <Home {...props}/>
+              </div>
+            )
+          }} />
         </div>
       </div>
     );

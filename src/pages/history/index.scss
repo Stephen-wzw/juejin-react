@@ -1,4 +1,13 @@
 .history {
   min-height: calc(100vh - 3.833rem);
-  background-color: #fff;
+
+  .post-list {
+    .post-item {
+      margin: 1rem 0;
+
+      .content-wrap {
+        border: none;
+      }
+    }
+  }
 }

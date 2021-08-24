@@ -19,15 +19,15 @@ class Footer extends Component {
     switch (id) {
       case "hot":
         this.setState({currentIndex: 0});
-        this.props.history.push("/", { categoryId, sortType: "hot" });
+        this.props.history.replace("/", { categoryId, sortType: "hot" });
         break;
       case "new":
         this.setState({currentIndex: 1});
-        this.props.history.push("/", { categoryId, sortType: "new" });
+        this.props.history.replace("/", { categoryId, sortType: "new" });
         break;
       case "history":
         this.setState({currentIndex: 2});
-        this.props.history.push("/history");
+        this.props.history.replace("/history");
         console.log("历史");
         break;
       default:
