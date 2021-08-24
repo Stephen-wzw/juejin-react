@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 
 import DetailHeader from "../../components/detail-header/detail-header";
+import CommentList from "../../components/comment-list/comment-list";
+import InfiniteScroll from "../../components/infinite-scroll/infinite-scroll";
+
+import { getArticleById, getCommentsByArticleId } from "../../fake-api";
+import { getDate } from "../../utils/common";
 
 import "./index.scss";
-
-import { getArticleById } from "../../fake-api";
-import { getDate } from "../../utils/common";
 
 export default class Detail extends Component {
 
   state = {
     isLoading: true,
     article: [],
+    comments: [],
   }
 
-  getArticle = async id => {
+  getArticles = async id => {
     const res = await getArticleById(id);
     
     if (res.code === 0) {
@@ -25,10 +28,16 @@ export default class Detail extends Component {
     }
   }
 
+  getComments = async id => {
+    const res = await getCommentsByArticleId(id);
+    console.log(res);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     const { id } = this.props.match.params;
-    this.getArticle(id);
+    this.getArticles(id);
+    this.getComments(id);
   }
 
   render() {
@@ -65,6 +74,10 @@ export default class Detail extends Component {
                 <h1 className="title">{article_info.title}</h1>
 
                 <div className="detail-content" dangerouslySetInnerHTML = {{__html: article_content}}></div>
+                
+                <InfiniteScroll>
+                  <CommentList />
+                </InfiniteScroll>
               </div>
             </div>
           )

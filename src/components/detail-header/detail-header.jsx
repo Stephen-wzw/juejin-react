@@ -20,6 +20,7 @@ class DetailHeader extends Component {
           <div className="title item">
             { this.props.title }
           </div>
+          <div className="block"></div>
         </div>
       </div>
     );
