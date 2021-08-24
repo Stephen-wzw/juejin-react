@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-export default class InfiniteScroll extends Component {
+
+import { withRouter } from "react-router-dom";
+class InfiniteScroll extends Component {
 
   // 组件挂载时监听滚动事件
   componentDidMount() {
     this.attachScrollListener();
+    if (this.props.match !== "/") {
+      this.detachScrollListener();
+    }
   }
 
   // 组件卸载时不再监听滚动事件
@@ -41,3 +46,5 @@ export default class InfiniteScroll extends Component {
     )
   }
 }
+
+export default withRouter(InfiniteScroll);
