@@ -5,9 +5,14 @@ class InfiniteScroll extends Component {
 
   // 组件挂载时监听滚动事件
   componentDidMount() {
-    this.attachScrollListener();
-    if (this.props.match !== "/") {
+    // this.attachScrollListener();
+    if (this.props.match.path !== "/") {
+      console.log();
+      console.log("不监听滚动");
       this.detachScrollListener();
+    } else {
+      console.log("监听滚动");
+      this.attachScrollListener();
     }
   }
 
@@ -31,7 +36,7 @@ class InfiniteScroll extends Component {
 
     let offset = scrollHeight - scrollTop - clientHeight;
 
-    if (offset <= 100) {
+    if (offset <= 200) {
       this.props.loadMore();
     }
   }
