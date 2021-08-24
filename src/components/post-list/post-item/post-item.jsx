@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 import { getTimeFromCurrnt } from "../../../utils/common";
-import { saveViewedArticleId } from "../../../utils/storage";
+import { saveViewedArticle } from "../../../utils/storage";
 
 import "./index.scss";
 
 class PostItem extends Component {
   itemClick = (id) => {
-    saveViewedArticleId(id);
+    saveViewedArticle(this.props.article);
     this.props.history.push(`/post/${id}`);
   };
 

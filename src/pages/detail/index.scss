@@ -1,5 +1,7 @@
 .detail {
   margin: 4.5rem 0 0;
+  position: relative;
+  z-index: 100;
 
   .content-wrap {
     height: 100%;

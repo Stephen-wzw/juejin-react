@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// import qs from "querystring";
 
 import HomeHeader from "../../components/home-header/home-header";
 import SubTag from "../../components/sub-tag/sub-tag";
 import InfiniteScroll from "../../components/infinite-scroll/infinite-scroll";
 import PostList from "../../components/post-list/post-list";
-import Footer from "../../components/footer/footer";
 
 import { getCategories,  getArticles } from "../../fake-api";
 
@@ -93,7 +91,6 @@ export default class Home extends Component {
             <PostList articles={articles} />
           </InfiniteScroll>
         </div>
-        <Footer />
       </div>
     );
   }
