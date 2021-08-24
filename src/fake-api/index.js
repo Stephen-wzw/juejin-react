@@ -72,6 +72,7 @@ export async function getArticleById(articleId) {
  * @param {*} limit 同上
  */
 export async function getCommentsByArticleId(articleId, offset = 0, limit = 10) {
+  console.log(offset);
   return {
     code: 0,
     data: {

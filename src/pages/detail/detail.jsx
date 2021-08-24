@@ -12,25 +12,47 @@ import "./index.scss";
 export default class Detail extends Component {
 
   state = {
-    isLoading: true,
+    detailLoaded: false,
     article: [],
     comments: [],
+    commentLoading: false,
+    offset: 0,
+    hasmore: true,
   }
 
   getArticles = async id => {
     const res = await getArticleById(id);
     
     if (res.code === 0) {
-      this.setState({ article: res.data.article, isLoading: false });
-      console.log(this.state.article.article_info.title);
+      this.setState({ article: res.data.article, detailLoaded: true });
     } else {
       this.props.history.replace("/404");
     }
   }
 
-  getComments = async id => {
-    const res = await getCommentsByArticleId(id);
-    console.log(res);
+  getComments = async (id, offset) => {
+    const res = await getCommentsByArticleId(id, offset);
+    this.setState({ hasmore: res.has_more });
+
+    if (this.state.commentLoading) {
+      const comments = this.state.comments.concat(res.data.comments);
+      this.setState({ comments, commentLoading: false });
+    } else {
+      this.setState({ comments: res.data.comments });
+    }
+  }
+
+  loadMore = () => {
+    if (this.state.commentLoading) return;
+
+    this.setState({ commentLoading: true });
+
+    const { id } = this.props.match.params;
+    let { offset } = this.state;
+    offset += 10;
+    this.setState({ offset });
+
+    this.getComments(id, offset);
   }
 
   componentDidMount() {
@@ -41,17 +63,15 @@ export default class Detail extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { article, isLoading } = this.state;
+    const { article, detailLoaded, comments, hasmore } = this.state;
     const { article_content, article_info, author_user_info } = article;
-    console.log(article_info);
 
     return (
       // TODO 骨架屏
       // TODO 图片懒加载
       <div className="detail">
         {
-          isLoading
+          !detailLoaded
           ? <div>loading</div>
           : (
             <div className="detail-wrap">
@@ -75,9 +95,13 @@ export default class Detail extends Component {
 
                 <div className="detail-content" dangerouslySetInnerHTML = {{__html: article_content}}></div>
                 
-                <InfiniteScroll>
-                  <CommentList />
+                <InfiniteScroll listenScroll={this.props.match} loadMore={this.loadMore}>
+                  <CommentList comments={comments}/>
                 </InfiniteScroll>
+
+                {
+                  hasmore ? null : <div className="more">没有更多了~~~</div>
+                }
               </div>
             </div>
           )

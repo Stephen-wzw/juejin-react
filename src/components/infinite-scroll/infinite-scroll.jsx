@@ -28,7 +28,7 @@ class InfiniteScroll extends Component {
       const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
       const clientHeight = document.documentElement.clientHeight;
       let offset = scrollHeight - scrollTop - clientHeight;
-  
+      
       if (offset <= 200) {
         this.props.loadMore();
       }

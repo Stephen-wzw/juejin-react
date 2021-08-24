@@ -43,7 +43,6 @@ export default class Home extends Component {
       const articles = this.state.articles.concat(res_articles.data.articles);
       this.setState({ articles, loading: false });
     } else {
-      
       this.setState({ articles: res_articles.data.articles })
     }
   }
