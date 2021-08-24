@@ -90,7 +90,7 @@ export default class Home extends Component {
           {
             tagList.length ? <SubTag tagList={tagList} /> : null
           }
-          <InfiniteScroll loadMore={this.loadMore}>
+          <InfiniteScroll loadMore={this.loadMore} listenScroll={this.props.match}>
             <PostList articles={articles} />
           </InfiniteScroll>
         </div>

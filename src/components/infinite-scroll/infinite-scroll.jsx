@@ -22,14 +22,16 @@ class InfiniteScroll extends Component {
   }
 
   scrollListener = () => {
-    const scrollHeight = document.body.scrollHeight;
-    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
-
-    let offset = scrollHeight - scrollTop - clientHeight;
-
-    if (offset <= 200) {
-      this.props.loadMore();
+    // listenScroll 是否监听滚动
+    if (this.props.listenScroll) {
+      const scrollHeight = document.body.scrollHeight;
+      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+      let offset = scrollHeight - scrollTop - clientHeight;
+  
+      if (offset <= 200) {
+        this.props.loadMore();
+      }
     }
   }
   
