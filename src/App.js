@@ -5,6 +5,7 @@ import Home from "./pages/home/home";
 import History from "./pages/history/history";
 import Detail from "./pages/detail/detail";
 
+import BackTop from "./components/backtop/backtop";
 import Footer from "./components/footer/footer";
 
 import "./app.scss";
@@ -24,6 +25,7 @@ export default class App extends Component {
               </div>
             )
           }} />
+          <BackTop />
           <Footer /> 
         </div>
       </div>
