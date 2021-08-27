@@ -11,7 +11,6 @@ import "./app.scss";
 export default class App extends Component {
   render() {
 
-    console.log(this.props.match.path);
     return (
       // TODO 状态保持
       <div className="app">

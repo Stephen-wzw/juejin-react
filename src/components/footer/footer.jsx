@@ -28,7 +28,6 @@ class Footer extends Component {
       case "history":
         this.setState({currentIndex: 2});
         this.props.history.replace("/history");
-        console.log("历史");
         break;
       default:
         break;
