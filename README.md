@@ -1,6 +1,10 @@
 # juejin
 
-react 仿掘金客户端，第一次使用 react 开发，有所不足请见谅。
+react 仿掘金移动端，第一次使用 react 开发，有所不足请见谅。
+
+## 演示地址
+
+[地址](https://qcasya.web.cloudendpoint.cn/)
 
 ## 运行
 
@@ -32,6 +36,6 @@ yarn start
 
 ## 待完善
 
-* 图片懒加载
+* 懒加载
 * 骨架屏
 * keep-alive
