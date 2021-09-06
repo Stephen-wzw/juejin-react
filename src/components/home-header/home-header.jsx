@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { bus } from "../../utils/bus";
 
 import "./index.scss";
 
@@ -11,6 +12,7 @@ class HomeHeader extends Component {
   }
 
   navClick = (id) => {
+    bus.emit("navChange");
     // 动态类名
     this.setState({currentId: id});
     // 点击路由切换，state传递参数

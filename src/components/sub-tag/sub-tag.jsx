@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { bus } from "../../utils/bus";
 
 import "./index.scss";
 
@@ -16,14 +17,10 @@ class SubTag extends Component {
     this.props.history.push("/", { categoryId: id, sortType })
   }
 
-  componentDidUpdate(prevProps) {
-    const { state } = this.props.location;
-    const pre_state = prevProps.location.state;
-
-    // 切换 category 时保证 All 为高亮
-    if (state !== pre_state && state.categoryId < 10) {
-      this.setState({currentIndex: 0})
-    }
+  componentDidMount() {
+    bus.on("navChange", () => {
+      this.setState({ currentIndex: 0 });
+    })
   }
 
   render() {
