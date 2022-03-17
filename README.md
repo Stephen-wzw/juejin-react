@@ -4,7 +4,7 @@ react 仿掘金移动端，第一次使用 react 开发，有所不足请见谅�
 
 ## 演示地址
 
-[地址](https://qcasya.web.cloudendpoint.cn/)
+[地址](https://stepping.tech/juejin)
 
 ## 运行
 
